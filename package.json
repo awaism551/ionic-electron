@@ -3,13 +3,19 @@
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
+  "main": "src/electron-starter.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "electron-serve": "ng build --prod && electron .",
+    "mac-release": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/assets/icon.icns --prune=true --out=release-builds",
+    "e2e": "ng e2e",
+    "mac-build": "electron-installer-dmg ./release-builds/ionic-desktop-darwin-x64/ionic-desktop.app builds/ionic-desktop",
+    "mac-complete-build": "electron-serve && mac-release && mac-build"
+
   },
   "private": true,
   "dependencies": {
@@ -43,6 +49,9 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "electron": "^7.0.0",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^14.0.6",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
